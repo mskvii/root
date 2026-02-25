@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>musuke</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'cinecaption226';
+            src: url('fonts/cinecaption226.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'cinecaption226', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #000000;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            transform: scale(1.75);
+            transform-origin: top center;
+        }
+
+        .header {
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .profile-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background: #333;
+            overflow: hidden;
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .bio {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .profile-section {
+            padding: 25px 55px;
+            background: #000000;
+            border: 2px solid #ffffff;
+            border-radius: 15px;
+            margin: 15px;
+            position: relative;
+            box-shadow: 0 0 0 1px #ffffff, 0 0 0 2px #000000, 0 0 0 3px #ffffff, 0 8px 25px rgba(255, 255, 255, 0.15);
+        }
+
+        .profile-section::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            pointer-events: none;
+        }
+
+        .profile-text {
+            color: #ffffff;
+            font-size: 12px;
+            line-height: 2;
+            text-align: center;
+        }
+
+        a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .small {
+            font-size: 10px;
+        }
+
+        .game-section {
+            padding: 25px 55px;
+            background: #000000;
+            border: 2px solid #ffffff;
+            border-radius: 15px;
+            margin: 15px;
+            position: relative;
+            box-shadow: 0 0 0 1px #ffffff, 0 0 0 2px #000000, 0 0 0 3px #ffffff, 0 8px 25px rgba(255, 255, 255, 0.15);
+        }
+
+        .game-section::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            pointer-events: none;
+        }
+
+        .game-title {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .game-text {
+            color: #ffffff;
+            font-size: 12px;
+            line-height: 2;
+            text-align: center;
+        }
+
+        .sns-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sns-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            border-bottom: 1px solid #333;
+            text-decoration: none;
+            color: #ffffff;
+            transition: background 0.2s;
+        }
+
+        .sns-item:hover {
+            background: #2a2a2a;
+        }
+
+        .sns-item:last-child {
+            border-bottom: none;
+        }
+
+        .sns-icon {
+            width: 20px;
+            text-align: center;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        .sns-info {
+            flex: 1;
+        }
+
+        .sns-name {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+
+        .sns-handle {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .arrow {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .twitter { color: #ffffff; }
+        .instagram { color: #E4405F; }
+        .discord { color: #5865F2; }
+
+        .discord-status {
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            border-bottom: 1px solid #333;
+            background: #000000;
+        }
+
+        .discord-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+            position: relative;
+        }
+
+        .discord-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .status-indicator {
+            display: none;
+        }
+
+        .discord-info {
+            flex: 1;
+        }
+
+        .discord-name {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #ffffff;
+        }
+
+        .discord-activity {
+            font-size: 14px;
+            color: #999;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+            }
+
+            .container {
+                border-radius: 0;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .sns-item {
+                padding: 12px 20px;
+            }
+
+            .discord-status {
+                padding: 12px 20px;
+            }
+
+            .profile-section {
+                padding: 15px 20px;
+            }
+
+            .game-section {
+                padding: 15px 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="profile-img">
+                <img src="icon.jpg" alt="プロフィール画像">
+            </div>
+            <h1>musuke</h1>
+            <p class="bio"></p>
+        </div>
+
+        <div class="profile-section">
+            <div class="game-title">MY PROFILE</div>
+            <p class="profile-text">
+                NAME ★ musuke<br>
+                AGE ★ Secret<br>
+                GENDER ★ Man<br>
+                MBTI ★ INFP-T (仲介者)<br><br>
+                嫌い<br>
+                ・ 不快な発言　・ 過激な下ネタ　・ 暴言　<br>
+                ・ イジリ　・ 嘘発言
+            </p>
+        </div>
+
+        <div class="game-section">
+            <div class="game-title">PLAY GAME</div>
+            <p class="game-text">
+                Minecraft Bedrock ＆ Java<br>
+                Overwatch<br>
+                Roblox<br>
+                Among us<br>
+                Apex legends<br>
+                R.E.P.O.<br>
+                etc...
+            </p>
+        </div>
+
+        <div class="profile-section">
+            <p class="profile-text">
+                SNS<br><br>
+                <span class="sns-icon twitter" style="font-weight: bold; margin-right: 2px; display: inline-block; width: 18px; text-align: center;">𝕏</span>... <a href="https://x.com/7ir86w_">@7ir86w_</a><br>
+                <i class="fab fa-instagram instagram" style="margin-right: 2px; display: inline-block; width: 18px; text-align: center;"></i>... <a href="https://instagram.com/m.s.k_vii">@m.s.k_vii</a><br>
+                <i class="fab fa-discord discord" style="margin-right: 2px; display: inline-block; width: 18px; text-align: center;"></i>... darker_days
+            </p>
+        </div>
+
+        <div class="profile-section">
+            <div class="game-title">好きな音楽</div>
+            <p class="profile-text">
+                <a href="https://www.youtube.com/watch?v=FtutLA63Cp8">Bad Apple!!</a><br>
+                <a href="https://youtu.be/Dp5xM_rM1yU?si=IfpliLc6-aTDoPgT">Por Una Cabeza</a><br>
+                <a href="https://youtu.be/xZKGTU_c-5w?si=9N751kiBuyAqz0eh">villain</a><br>
+                <a href="https://youtu.be/edLUwSDHZ2M?si=cHTP8dbFJ4qfj-ch">审判时刻</a>
+            </p>
+        </div>
+
+        <div class="profile-section">
+            <p class="profile-text small">
+                関わって良かったと思える人だけ仲良く関わります。<br>
+                「この人無理だな」って感じたら何も言わずに消えるつもりなので、そこはご了承を。<br>
+            </p>
+        </div>
+
+        <ul class="sns-list">
+        </ul>
+    </div>
+
+    <script>
+    </script>
+</body>
+</html>
