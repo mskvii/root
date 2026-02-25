@@ -455,28 +455,39 @@
 
     <script>
         window.addEventListener('DOMContentLoaded', function() {
-            const progressText = document.getElementById('progress-text');
-            const progressFill = document.querySelector('.progress-fill');
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += 1;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                }
-                progressText.textContent = progress + '%';
-                progressFill.style.width = progress + '%';
-            }, 100); // 10秒で100%になるように
+            const hasVisited = localStorage.getItem('hasVisited');
+            const loading = document.getElementById('loading');
+            const container = document.querySelector('.container');
 
-            setTimeout(function() {
-                const loading = document.getElementById('loading');
-                loading.classList.add('fade-out');
+            if (!hasVisited) {
+                // 初めての訪問時、ローディング画面を表示
+                localStorage.setItem('hasVisited', 'true');
+                const progressText = document.getElementById('progress-text');
+                const progressFill = document.querySelector('.progress-fill');
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 1;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                    }
+                    progressText.textContent = progress + '%';
+                    progressFill.style.width = progress + '%';
+                }, 100); // 10秒で100%になるように
+
                 setTimeout(function() {
-                    loading.style.display = 'none';
-                    const container = document.querySelector('.container');
-                    container.style.opacity = '1';
-                }, 1000); // フェードアウト後にメインコンテンツを表示
-            }, 10000); // 10秒後にフェードアウト開始
+                    loading.classList.add('fade-out');
+                    setTimeout(function() {
+                        loading.style.display = 'none';
+                        container.style.opacity = '1';
+                    }, 1000); // フェードアウト後にメインコンテンツを表示
+                }, 10000); // 10秒後にフェードアウト開始
+            } else {
+                // 2回目以降、ローディング画面なしで直接表示
+                loading.style.display = 'none';
+                container.style.transition = 'none';
+                container.style.opacity = '1';
+            }
         });
     </script>
 </body>
