@@ -386,7 +386,7 @@
             <h1>musuke</h1>
             <p class="bio"></p>
         </div>
-
+        
         <div class="profile-section">
             <div class="game-title">MY PROFILE</div>
             <p class="profile-text">
@@ -422,9 +422,10 @@
                 SNS<br><br>
                 <span class="sns-icon twitter" style="font-weight: bold; margin-right: 2px; display: inline-block; width: 18px; text-align: center;">𝕏</span>... <a href="https://x.com/7ir86w_">@7ir86w_</a><br>
                 <i class="fab fa-instagram instagram" style="margin-right: 2px; display: inline-block; width: 18px; text-align: center;"></i>... <a href="https://instagram.com/m.s.k_vii">@m.s.k_vii</a><br>
-                <i class="fab fa-discord discord" style="margin-right: 2px; display: inline-block; width: 18px; text-align: center;"></i>... darker_days
+                <i class="fab fa-discord discord" style="margin-right: 2px; display: inline-block; width: 18px; text-align: center; cursor: pointer;" onclick="toggleDiscord()"></i>... darker_days
             </p>
         </div>
+
 
         <div class="profile-section">
             <div class="game-title">好きな音楽</div>
@@ -438,7 +439,7 @@
 
         <div class="profile-section">
             <p class="profile-text cinecaption">
-                関わって良かったと思える人だけ仲良く関わります。<br>
+                関わって良かったと思える人だけ仲良く<a href="https://discord.gg/KZ64fSRFZh">関わります。</a><br>
                 <br>
                 辛辣な発言やマジレスなど多々あるかもしれませんが、大目に見てください。<br>
                 <br>
@@ -487,6 +488,25 @@
                 loading.style.display = 'none';
                 container.style.transition = 'none';
                 container.style.opacity = '1';
+            }
+
+            function toggleDiscord() {
+                const discordSection = document.getElementById('discord-section');
+                if (discordSection) {
+                    discordSection.style.display = discordSection.style.display === 'none' ? 'block' : 'none';
+                } else {
+                    const newSection = document.createElement('div');
+                    newSection.className = 'profile-section';
+                    newSection.id = 'discord-section';
+                    newSection.innerHTML = `
+                        <div class="game-title">DISCORD SERVER</div>
+                        <p class="profile-text">
+                            <a href="https://discord.gg/KZ64fSRFZh">discord.gg/KZ64fSRFZh</a>
+                        </p>
+                    `;
+                    const snsSection = document.querySelector('.profile-section');
+                    snsSection.parentNode.insertBefore(newSection, snsSection.nextSibling);
+                }
             }
         });
     </script>
