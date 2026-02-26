@@ -447,56 +447,6 @@
 
     <script>
         window.addEventListener('DOMContentLoaded', function() {
-            const hasVisited = localStorage.getItem('hasVisitedWelcome');
-
-            if (!hasVisited) {
-                localStorage.setItem('hasVisitedWelcome', 'true');
-
-                // WELCOME text effect
-                const overlay = document.createElement('div');
-                overlay.id = 'welcome-overlay';
-                overlay.style.position = 'fixed';
-                overlay.style.top = '0';
-                overlay.style.left = '0';
-                overlay.style.width = '100%';
-                overlay.style.height = '100%';
-                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-                overlay.style.backdropFilter = 'blur(10px)';
-                overlay.style.zIndex = '9998';
-                document.body.appendChild(overlay);
-
-                const welcomeDiv = document.createElement('div');
-                welcomeDiv.id = 'welcome-text';
-                welcomeDiv.style.position = 'fixed';
-                welcomeDiv.style.top = '50%';
-                welcomeDiv.style.left = '50%';
-                welcomeDiv.style.transform = 'translate(-50%, -50%)';
-                welcomeDiv.style.fontSize = '48px';
-                welcomeDiv.style.fontFamily = 'AbashiriMincho';
-                welcomeDiv.style.color = '#ffffff';
-                welcomeDiv.style.zIndex = '9999';
-                document.body.appendChild(welcomeDiv);
-
-                const welcomeText = 'WELCOME';
-                let i = 0;
-                const typeInterval = setInterval(() => {
-                    welcomeDiv.textContent += welcomeText[i];
-                    i++;
-                    if (i >= welcomeText.length) {
-                        clearInterval(typeInterval);
-                        setTimeout(() => {
-                            welcomeDiv.style.opacity = '0';
-                            welcomeDiv.style.transition = 'opacity 1s ease-out';
-                            overlay.style.opacity = '0';
-                            overlay.style.transition = 'opacity 1s ease-out';
-                            setTimeout(() => {
-                                welcomeDiv.remove();
-                                overlay.remove();
-                            }, 1000);
-                        }, 2000);
-                    }
-                }, 200);
-            }
 
             // Starfield effect
             const starCanvas = document.createElement('canvas');
